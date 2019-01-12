@@ -1,13 +1,19 @@
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-class MyFirstStream{
-	public static void main(String args[])
-	{
-		int[] ar = {1,2,3,4,5};
-		IntStream stm1 = Arrays.stream(ar);			//ë°°ì—´ arë¡œë¶€í„° ìŠ¤íŠ¸ë¦¼ ìƒì„±
-		IntStream stm2 = stm1.filter(n->n%2==1);	//ì¤‘ê°„ ì—°ì‚° ì§„í–‰
-		int sum = stm2.sum();						//ìµœì¢…ì—°ì‚°ì§„í–‰
-		System.out.println(sum);
-	}
+class MyFirstStream {
+    public static void main(String[] args) {
+        int[] ar = {1, 2, 3, 4, 5};
+
+        // ½ºÆ®¸² »ı¼º        
+        IntStream stm1 = Arrays.stream(ar);
+
+        // Áß°£ ÆÄÀÌÇÁ ±¸¼º
+        IntStream stm2 = stm1.filter(n -> n%2 == 1);
+
+        // ÃÖÁ¾ ÆÄÀÌÇÁ ±¸¼º
+        int sum = stm2.sum();
+
+        System.out.println(sum);
+    }
 }

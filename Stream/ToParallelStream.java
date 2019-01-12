@@ -1,10 +1,12 @@
 import java.util.List;
 import java.util.Arrays;
+import java.util.stream.Stream;
 import java.util.function.BinaryOperator;
 
-class ReduceStream {
+class ToParallelStream {
     public static void main(String[] args) {
         List<String> ls = Arrays.asList("Box", "Simple", "Complex", "Robot");
+        Stream<String> ss = ls.stream();
         
         BinaryOperator<String> lc = 
             (s1, s2) -> { 
@@ -14,7 +16,7 @@ class ReduceStream {
                    return s2;                   
             };
         
-        String str = ls.stream()
+        String str = ss.parallel()
                       .reduce("", lc);
       
         System.out.println(str);

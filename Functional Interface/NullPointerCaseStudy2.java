@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 class Friend {
     String name;
     Company cmp;    // null 일 수 있음
@@ -6,7 +8,6 @@ class Friend {
         name = n;
         cmp = c;
     }
-
     public String getName() { return name; }
     public Company getCmp() { return cmp; }
 }
@@ -19,7 +20,6 @@ class Company {
         cName = cn;
         cInfo = ci;
     }
-
     public String getCName() { return cName; }
     public ContInfo getCInfo() { return cInfo; }
 
@@ -33,31 +33,19 @@ class ContInfo {
         phone = ph;
         adrs = ad;
     }
-
     public String getPhone() { return phone; }
     public String getAdrs() { return adrs; }
 
 }
 
-class NullPointerCaseStudy {
-    public static void showCompAddr(Friend f) {
-        String addr = null;
-    
-        if(f != null) {
-            Company com = f.getCmp();
-            
-            if(com != null) {
-                ContInfo info = com.getCInfo();
-                
-                if(info != null)
-                    addr = info.getAdrs();   
-            }
-        }
-        
-        if(addr != null)
-            System.out.println(addr);
-        else
-            System.out.println("There's no address information.");
+class NullPointerCaseStudy2 {
+    public static void showCompAddr(Optional<Friend> f) {
+        String addr = f.map(Friend::getCmp)
+                .map(Company::getCInfo)
+                .map(ContInfo::getAdrs)
+                .orElse("There's no address information.");
+
+        System.out.println(addr);
     }
 
     public static void main(String[] args) {
@@ -67,6 +55,6 @@ class NullPointerCaseStudy {
         Friend frn = new Friend("LEE SU", cp);
 
         // 친구 정보에서 회사 주소를 출력
-        showCompAddr(frn);
+        showCompAddr(Optional.of(frn));
     }
 }

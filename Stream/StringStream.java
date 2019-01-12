@@ -1,12 +1,14 @@
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-class StringStream{
-	public static void main(String[] args)
-	{
-		String[] names = {"YOON", "LEE", "PARK"};
-		Stream<String> stm = Arrays.stream(names);		//ìŠ¤íŠ¸ë¦¼ ìƒì„±
-		stm.forEach(s->System.out.println(s));			// ìµœì¢… ì—°ì‚° ì§„í–‰
-		//		.			.forEach(s->System.out.println(s));
-	}
+class StringStream {
+    public static void main(String[] args) {
+        String[] names = {"YOON", "LEE", "PARK"};
+        
+        // ½ºÆ®¸² »ý¼º
+        Stream<String> stm = Arrays.stream(names);
+        
+        // ÃÖÁ¾ ¿¬»ê ÁøÇà
+        stm.forEach(s -> System.out.println(s));
+    }
 }

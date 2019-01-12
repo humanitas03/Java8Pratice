@@ -124,14 +124,15 @@
 ```
 
 ## 2. Collection Framwork
-* Java C/F
-	- java Collection Framework는 객체들을 관리하기 위해 사용되는 컨테이너 클래스들의 집합체
-	- 컨테이너 클래스 종류는 크게 List, Set, Queue, Map 계열로 구분
-		* List interface : 순차적 나열로 순서 지정이 가능한 객체들의 집합
-		* Set interface : 중복을 허락하지 않는 객체들의 집합
-		* Queue interface : FIFO 구조 집합
-		* Map interface : 키와 그 키에 대응하는 객체들로 이루어진 집합
-	- 컬렉션 관련 인터페이스와 java.util.* 패키지에 포함되어 있음
+
+### Java C/F
+- java Collection Framework는 객체들을 관리하기 위해 사용되는 컨테이너 클래스들의 집합체
+- 컨테이너 클래스 종류는 크게 List, Set, Queue, Map 계열로 구분
+	* List interface : 순차적 나열로 순서 지정이 가능한 객체들의 집합
+	* Set interface : 중복을 허락하지 않는 객체들의 집합
+	* Queue interface : FIFO 구조 집합
+	* Map interface : 키와 그 키에 대응하는 객체들로 이루어진 집합
+- 컬렉션 관련 인터페이스와 java.util.* 패키지에 포함되어 있음
 
 * Collection Interface
 	- 컬렉션 프레임워크 최상위 인터페이스
@@ -204,9 +205,106 @@
 
 		...
 	}
-``
+```
+
 ## 3. Lambda & Functional Interface
 
-* 
+### 람다(Lambda)
+* Java 8부터 함수적 프로그래밍을 위해 람다(Lambda)가 등장
+* 람다 표현식은 메소드로 전달할 수 잇는 익명 함수를 단순화한 코드 블록
+* 람다 표현식은 특정 클래스에 종속되지 않기 때문에 함수라고 한다.
+* 람다 표현식은 전달 인자로 보내거나 변수에 저장이 가능
+
+```java
+Runnable runnable = new Runnable(){
+	@Override
+	public void run(){
+
+	}
+}
+
+Runnable runnable = () ->{ }; //Lambda
+```
+
+* 람다의 개요
+	- 람다 표현식은 익명 구현 클래스를 생성하고 객체화
+	- 익명 구현 클래스로 생성된 람다 표현식은 인터페이스로 대입 가능하며 이 인터페이스를 ***함수형 인터페이스***fkrh gksek.
+	- 하나의 추상 메서드를 갖는 인터페이스는 모두 함수형 인터페이스가 가능
+	- 다수의 디폴트 메소드를 가지고 있는 인터페이스라도 추상메소드가 하나라면 함수형 인터페이스
+	- 함수형 인터페이스를 정의할 때 'FunctionalInterface'어노테이션을 이용하여 컴파일 검사를 진행 가능
+	- 함수형 인터페이스의 추상 메서드 시그니처 함수를 함수 디스크립터(Funcion Discriptor)라고 한다.
+
+```java
+@FunctionalInterface
+public interface FunctionalInterfaceSample{
+	void testMethod();
+	void errorMethod();		//Error!
+}
+```
+
+* 람다의 활용
+	- 람다 표현식의 사용은 메소드 내부에서 주로 이루어지기 때문에 지역변수 사용시 제약이 존재
+	- 메서드 내부에서 람다 표현식은 곧 익명 객체를 메서드 내부에서 생성하는 것과 같음
+	- 람다 표현식에서 접근하는 해당 메서도의 지역 변수와 매개변수는 final 특성을 적용
+	- 람다 표현식에서 해당 메서드의 지역변수, 매개변수를 참조하는 것을 람다 캡쳐링(Lambda Capturing)이라고 한다.
+
+```java
+	int number = 10;
+	Runnable runnable = () -> System.out.println(number);		//Correct
+
+	int number = 10;
+	Runnable runnable = () -> System.out.println(number);		//Error
+	number = 20;
+```
+
+### 함수형인터페이스(Functional Interface)
+* 미리 정의되어 있는 함수형 인터페이스
+	- 자바에서느 메소드의 반환형과 매개변수 선언에 차이를 둔 다양한 함수형 인터페이스들을 표준으로 정의하고 있음
+	- java.util.function
+	- 기본형 특화는 java의 auto-boxing 동작을 제한한 함수형 인터페이스
+
+<table style="width:100%">
+  <tr>
+    <th>함수형 인터페이스</th>
+    <th>함수 디스크립터</th> 
+    <th>기본형 특화</th>
+  </tr>
+  <tr>
+    <td> <pre>Predicate<T></pre> </td>
+    <td> <pre>T->boolean(test, 전달된 인자를 대상으로 true, false 판단)</pre> </td> 
+    <td> <pre>IntPredicate, LongPredicate, DoublePredicate</pre> </td>
+  </tr>
+
+   <tr>
+    <td> <pre>Consumer<T></pre> </td>
+    <td> <pre>T->void(accept, 전달된 인자를 기반으로 '반환' 외외의 다른 결과를 보일때)</pre> </td> 
+    <td> <pre>IntConsumer, LongConsumer, DoubleConsumer</pre> </td>
+  </tr>
+
+   <tr>
+    <td> <pre>Function<T, R></pre> </td>
+    <td> <pre>T->void(apply, 전달된 인자와 반환값이 모두 존재할 때)</pre> </td> 
+    <td> <pre>IntFunction<T> .... </pre> </td>
+  </tr>
+
+  <tr>
+    <td> <pre>Supplier<T, R></pre> </td>
+    <td> <pre>()->T(get, 단순히 무언가를 반환할 때)</pre> </td> 
+    <td> <pre>BooleanSupplier.... </pre> </td>
+  </tr>
+
+   <tr>
+    <td> <pre>BinaryOperator<T></pre> </td>
+    <td> <pre>(T,T)->T(static minBy, static maxBy)</pre> </td> 
+    <td> <pre>IntBinaryOperator .... </pre> </td>
+  </tr>
+
+  <tr>
+    <td> <pre>...</pre> </td>
+    <td> <pre>...</pre> </td> 
+    <td> <pre>... </pre> </td>
+  </tr>
+
+</table>
 
 ## 4. Stream
