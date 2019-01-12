@@ -77,8 +77,8 @@
 		- up-casting 이후에 생성된 인스턴스가 자식클래스 타입이라 할지라도 자식 클래스 고유 메서드 호출 불가
 		- 하지만 자식 클래스가 부모 클래스로 부터 상속한 재정의 메서드가 있다면 부모 클래스 타입의 레퍼런스로 호출
 		- 상속 관계에서 객체간 형변환과 재정의 메서드 바인딩은 다형성(Polymorphism) 구현의 기본
-
-
+	
+- ![Alt text](/img/ObjectCasting.JPG)
 
 * 다형성(Polymorphism)
 	- 다형성은 동일한 이름의 메서드 호출에 서로 다른 기능을 수행하는 것(ex: toString())
@@ -98,6 +98,8 @@
 	- Java 8 이전에는 인터페이스의 모든 메서드는 추상 메서드여야 했음
 		* 8 이상부터 static 메소드와 default 메서드 기능 추가
 		* default 메서드를 추가함으로서 인터페이스에 확장 기능 추가가 용이
+
+	- ![Alt text](/img/Interface.JPG)
 ```java
 	public interface IBehavior{
 		void play();
@@ -147,7 +149,7 @@
 		* iterator(): 해당 컬렉션이 포함하고 있는 요소 순회를 위한 iterator 객체를 반환
 	- **Java 8 버전 이후 Stream 관련 메서드 추가**
 	- ![Alt text](/img/CollectionCore.jpg)
-
+	
 * Generic Type
 	- 컬렉션 프레임워크에 대해서 정확히 이해하기 위해서는 Generic에 대한 이해가 필요
 	- Java Generic은 크게 Generic Type과 Generic 메소드로 구분
@@ -182,7 +184,9 @@
 ```
 	- Object 클래스는 최상위 클래스로서 java의 모든 클래스를 참조가능
 	- 객체의 구분없이 배열에 담는것은 담을 때 편리성은 있으나 꺼낼때 문제가 발생
+	- ![Alt text](/img/Generic.JPG)
 
+<br/>
 	- Generic 클래스는 타입 패러미터를 한개 이상 받는 클래스
 	- 타입 파라미터 타입은 Generic 클래스 생성 시점에 결정
 	- Generic 메서드는 Generic 클래스와 마찬가지로 한개 이상의 타입 파라미터를 받는 메서드
