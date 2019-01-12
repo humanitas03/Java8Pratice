@@ -1,5 +1,18 @@
 # Java 1.8 Fundamentals
-=====================
+---------------------------------------------------------------
+
+### Java 8 In action
+Link : [Java8InAction][Java8InActionLink]
+[Java8InActionLink] : https://www.manning.com/books/java-8-in-action
+Link : [TransJIA][TransJIALink]
+[TransJIALink] : http://www.hanbit.co.kr/store/books/look.php?p_code=B1999551123
+
+
+### References
+Link : [열혈java프로그래밍][JAVAallLink]
+[JAVAallLink] : https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=113132231
+
+----------------------------------------------------
 
 ## 1. abstreaction
 
