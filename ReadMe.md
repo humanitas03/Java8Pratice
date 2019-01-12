@@ -154,6 +154,7 @@
 	- 컬렉션 프레임워크에 대해서 정확히 이해하기 위해서는 Generic에 대한 이해가 필요
 	- Java Generic은 크게 Generic Type과 Generic 메소드로 구분
 	- 클래스와 인터페이스에 문법을 통해 매개변수화 하는 것이 Generic Type
+
 ```java
 	//일반 클래스의 정의
 	public class Box{
@@ -187,10 +188,10 @@
 	- 객체의 구분없이 배열에 담는것은 담을 때 편리성은 있으나 꺼낼때 문제가 발생
 	- ![Alt text](/img/Generic.JPG)
 
-<br/>
 	- Generic 클래스는 타입 패러미터를 한개 이상 받는 클래스
 	- 타입 파라미터 타입은 Generic 클래스 생성 시점에 결정
 	- Generic 메서드는 Generic 클래스와 마찬가지로 한개 이상의 타입 파라미터를 받는 메서드
+	
 ```java
 	public class GenericClassSample<K, V>{
 		private K key;
