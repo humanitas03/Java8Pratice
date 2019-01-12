@@ -11,7 +11,7 @@ class FilterStream {
 
         List<String> sl = Arrays.asList("Toy", "Robot", "Box");
         sl.stream()
-            .filter(s -> s.length() == 3)
+            .filter(s -> s.length()>1)
             .forEach(s -> System.out.print(s + "\t"));
         System.out.println();       
     }

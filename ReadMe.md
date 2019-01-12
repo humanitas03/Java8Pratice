@@ -270,41 +270,221 @@ public interface FunctionalInterfaceSample{
     <th>기본형 특화</th>
   </tr>
   <tr>
-    <td> <pre>Predicate<T></pre> </td>
-    <td> <pre>T->boolean(test, 전달된 인자를 대상으로 true, false 판단)</pre> </td> 
-    <td> <pre>IntPredicate, LongPredicate, DoublePredicate</pre> </td>
+    <td> <xmp>Predicate<T></xmp> </td>
+    <td> <xmp>T->boolean(test, 전달된 인자를 대상으로 true, false 판단)</xmp> </td> 
+    <td> <xmp>IntPredicate, LongPredicate, DoublePredicate</xmp> </td>
   </tr>
 
    <tr>
-    <td> <pre>Consumer<T></pre> </td>
+    <td> <xmp>Consumer<T></xmp> </td>
     <td> <pre>T->void(accept, 전달된 인자를 기반으로 '반환' 외외의 다른 결과를 보일때)</pre> </td> 
     <td> <pre>IntConsumer, LongConsumer, DoubleConsumer</pre> </td>
   </tr>
 
    <tr>
-    <td> <pre>Function<T, R></pre> </td>
-    <td> <pre>T->void(apply, 전달된 인자와 반환값이 모두 존재할 때)</pre> </td> 
-    <td> <pre>IntFunction<T> .... </pre> </td>
+    <td> <xmp>Function<T, R></xmp> </td>
+    <td> <xmp>T->void(apply, 전달된 인자와 반환값이 모두 존재할 때)</xmp> </td> 
+    <td> <xmp>IntFunction<T> .... </xmp> </td>
   </tr>
 
   <tr>
-    <td> <pre>Supplier<T, R></pre> </td>
-    <td> <pre>()->T(get, 단순히 무언가를 반환할 때)</pre> </td> 
-    <td> <pre>BooleanSupplier.... </pre> </td>
+    <td> <xmp>Supplier<T, R></xmp> </td>
+    <td> <xmp>()->T(get, 단순히 무언가를 반환할 때)</xmp> </td> 
+    <td> <xmp>BooleanSupplier.... </xmp> </td>
   </tr>
 
    <tr>
-    <td> <pre>BinaryOperator<T></pre> </td>
-    <td> <pre>(T,T)->T(static minBy, static maxBy)</pre> </td> 
-    <td> <pre>IntBinaryOperator .... </pre> </td>
+    <td> <xmp>BinaryOperator<T></xmp> </td>
+    <td> <xmp>(T,T)->T(static minBy, static maxBy)</xmp> </td> 
+    <td> <xmp>IntBinaryOperator .... </xmp> </td>
   </tr>
 
   <tr>
-    <td> <pre>...</pre> </td>
-    <td> <pre>...</pre> </td> 
-    <td> <pre>... </pre> </td>
+    <td> <xmp>...</xmp> </td>
+    <td> <xmp>...</xmp> </td> 
+    <td> <xmp>... </xmp> </td>
   </tr>
 
 </table>
 
 ## 4. Stream
+
+* Stream 개요
+	- 스트림은 Java 8부터 추가된 API로 선언형으로 컬랙션 데이터를 처리할 수 잇음
+	- 스트림을 이용하면 멀티 스레드 구현을 하지 않아도 병렬 데이터 처리가 가능(Parallel Stream)
+	- 스트림은 한번 사용하면 소모되기 때문에 다시 사용하기 위해서는 새로 만들어서 사용한다.
+	- 스트림 연산은 원본을 변경하지 않는다(Immutable)
+
+```java
+List<String> list = Arrays.asList("Lee", "Park", "Kim", "Hwang");
+
+//기존
+Iterator<String> it = list.iterator();
+while(it.hasNext())
+{
+	System.out.println(it.next());
+}
+
+//stream 활용
+list.stream.forEach(name->System.out.println(name));
+```
+* Stream의 특징
+	- 컬렉션은 데이터에 대한 저장 및 접근연산이 주가되는 반면 스트림은 계산 식이 주를 이룸
+	- 순차적 연산 / 병렬 연산이 가능
+	- 스트림 연산은 연산끼리 연결하여 파이프라인을 구성할 수 있도록 각 연산은 스트림을 반환한다.
+	- 내부 반복 지원
+
+```java
+	List<String> customerNames = customers.stream()
+									.filter(c->c.getAge() < 30)	//(1)
+									.sorted(Comparator.comparing(Customer::getAge))	//(2)
+								//	.sorted(Comparator.comparing(()->customer.getAge()))
+									.map(Customer::getName)	//(3)
+									.collect(Collectors.toList()) //(4)
+```
+	-[]
+		1) Stream<Customer> 반환
+		2) Stream<Customer> 반환
+		3) Stream<String> 반환
+		4) List<String> 반환
+
+	- iterator와 마찬가지로 한번만 탐색이 가능
+	- 한번 탐색한 요소를 다시 탐색하기 위해 초기 데이터 소스에서 다시 새로운 스트림을 만들어야 한다.
+
+* stream 연산
+	- stream 연산은 중간연산과 최종연산이 있음
+	- 중간 연산은 filter, map과 같은 연산으로 Stream을 반환
+	- 최종연산은 forEach, collect와 같은 연산으로 void나 컬렉션 타입을 반환
+
+<table style="width:100%">
+  <tr>
+    <th>연산</th>
+    <th>반환 형식</th> 
+    <th>연산 인수</th>
+  </tr>
+  <tr>
+    <td> <xmp>filter</xmp> </td>
+    <td> <xmp>Stream<T></xmp> </td> 
+    <td> <xmp>Predicate<T></xmp> </td>
+  </tr>
+
+   <tr>
+   <td> <xmp>map</xmp> </td>
+    <td> <xmp>Stream<T></xmp> </td> 
+    <td> <xmp>Function<T,R></xmp> </td>
+  </tr>
+
+   <tr>
+    <td> <xmp>limit</xmp> </td>
+    <td> <xmp>Stream<T></xmp> </td> 
+    <td> <xmp></xmp> </td>
+  </tr>
+
+  <tr>
+  <td> <xmp>sorted</xmp> </td>
+    <td> <xmp>Stream<T></xmp> </td> 
+    <td> <xmp>Comparator<T></xmp> </td>
+  </tr>
+
+   <tr>
+    <td> <xmp>distinct</xmp> </td>
+    <td> <xmp>Stream<T></xmp> </td> 
+    <td> <xmp></xmp> </td>
+  </tr>
+</table>
+
+---------------------
+<table style="width:100%">
+  <tr>
+    <th>연산</th>
+    <th>반환 형식</th> 
+  </tr>
+  <tr>
+    <td> <xmp>forEach</xmp> </td>
+    <td> <xmp>스트림의 각 요소를 소비하며 람다 적용 . void반환</xmp> </td> 
+  </tr>
+   <tr>
+    <td> <xmp>count</xmp> </td>
+    <td> <xmp>스트림 요소의 수를 반환. Long반환</xmp> </td> 
+  </tr>
+   <tr>
+    <td> <xmp>collect</xmp> </td>
+    <td> <xmp>List Map형태의 컬랙션 반환</xmp> </td> 
+  </tr>
+</table>
+
+
+* stream 활용
+	- 스트림은 Predicate<T>를 전달 인자로 받아 필터링하는 filter 메소드 제공
+	- filter 메소드는 중간연산을 수행하며 Stream을 반환
+	- distinct, limit 메소드 등과 파이프라인을 구성할 수 있음.
+
+```java
+List<Integer> numbers = Arrays.asList(100,100,100,7,20,22,35,27);
+
+numbers.stream()
+		.filter(i->i%2==0)
+		.distinct()					//중복제거
+		.forEach((i)->System.out.print(i+", "));
+
+```
+
+```java
+List<Integer> numbers = Arrays.asList(100,100,100,7,20,22,35,27);
+
+numbers.stream()
+		.filter(i->i%2==0)
+		.limit(3)					//최대 요소 개수 추출
+		.forEach((i)->System.out.print(i+", "));
+
+```
+
+```java
+List<Integer> numbers = Arrays.asList(100,100,100,7,20,22,35,27);
+
+numbers.stream()
+		.filter(i->i%2==0)
+		.skip(1)					//추출 제외
+		.forEach((i)->System.out.print(i+", "));
+
+```
+
+	- 스트림은 함수를 전달인자로 받는 map 메소드 지원
+	- map 메소드는 전닯다는 함수를 각 데이터에 적용되며 그 결과가 새로운 요소로 매핑
+
+```java
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.*;
+
+class Apple{
+	private int weight;
+
+	public Apple(int weight)
+	{
+		this.weight = weight;
+	}
+
+	public int getWeight(){
+		return weight;
+	}
+}
+
+class StreamTest{
+	public static void main(String[] args)
+	{
+		List<Apple> apples = new ArrayList<>();
+		apples.add(new Apple(100));
+		apples.add(new Apple(88));
+		apples.add(new Apple(37));
+
+		List<Integer> applesWeight = apples.stream()
+										.map(Apple::getWeight)
+									//	.map((apple)->apple.getWeight())
+										.collect(Collectors.toList());
+		System.out.println(applesWeight);
+	}
+}
+
+```
