@@ -186,12 +186,12 @@
 
 	- Object 클래스는 최상위 클래스로서 java의 모든 클래스를 참조가능
 	- 객체의 구분없이 배열에 담는것은 담을 때 편리성은 있으나 꺼낼때 문제가 발생
-	- ![Alt text](/img/Generic.JPG)
+- ![Alt text](/img/Generic.JPG)
 
 	- Generic 클래스는 타입 패러미터를 한개 이상 받는 클래스
 	- 타입 파라미터 타입은 Generic 클래스 생성 시점에 결정
 	- Generic 메서드는 Generic 클래스와 마찬가지로 한개 이상의 타입 파라미터를 받는 메서드
-	
+
 ```java
 	public class GenericClassSample<K, V>{
 		private K key;
