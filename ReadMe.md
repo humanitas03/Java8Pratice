@@ -182,6 +182,7 @@
 		}
 	}
 ```
+
 	- Object 클래스는 최상위 클래스로서 java의 모든 클래스를 참조가능
 	- 객체의 구분없이 배열에 담는것은 담을 때 편리성은 있으나 꺼낼때 문제가 발생
 	- ![Alt text](/img/Generic.JPG)
@@ -275,39 +276,39 @@ public interface FunctionalInterfaceSample{
     <th>기본형 특화</th>
   </tr>
   <tr>
-    <td> <xmp>Predicate<T></xmp> </td>
-    <td> <xmp>T->boolean(test, 전달된 인자를 대상으로 true, false 판단)</xmp> </td> 
-    <td> <xmp>IntPredicate, LongPredicate, DoublePredicate</xmp> </td>
+    <td> Predicate<T> </td>
+    <td> T->boolean(test, 전달된 인자를 대상으로 true, false 판단) </td> 
+    <td> IntPredicate, LongPredicate, DoublePredicate </td>
   </tr>
 
    <tr>
-    <td> <xmp>Consumer<T></xmp> </td>
+    <td> Consumer<T> </td>
     <td> <pre>T->void(accept, 전달된 인자를 기반으로 '반환' 외외의 다른 결과를 보일때)</pre> </td> 
     <td> <pre>IntConsumer, LongConsumer, DoubleConsumer</pre> </td>
   </tr>
 
    <tr>
-    <td> <xmp>Function<T, R></xmp> </td>
-    <td> <xmp>T->void(apply, 전달된 인자와 반환값이 모두 존재할 때)</xmp> </td> 
-    <td> <xmp>IntFunction<T> .... </xmp> </td>
+    <td> Function<T, R> </td>
+    <td> T->void(apply, 전달된 인자와 반환값이 모두 존재할 때) </td> 
+    <td> IntFunction<T> ....  </td>
   </tr>
 
   <tr>
-    <td> <xmp>Supplier<T, R></xmp> </td>
-    <td> <xmp>()->T(get, 단순히 무언가를 반환할 때)</xmp> </td> 
-    <td> <xmp>BooleanSupplier.... </xmp> </td>
+    <td> Supplier<T, R> </td>
+    <td> ()->T(get, 단순히 무언가를 반환할 때) </td> 
+    <td> BooleanSupplier....  </td>
   </tr>
 
    <tr>
-    <td> <xmp>BinaryOperator<T></xmp> </td>
-    <td> <xmp>(T,T)->T(static minBy, static maxBy)</xmp> </td> 
-    <td> <xmp>IntBinaryOperator .... </xmp> </td>
+    <td> BinaryOperator<T> </td>
+    <td> (T,T)->T(static minBy, static maxBy) </td> 
+    <td> IntBinaryOperator ....  </td>
   </tr>
 
   <tr>
-    <td> <xmp>...</xmp> </td>
-    <td> <xmp>...</xmp> </td> 
-    <td> <xmp>... </xmp> </td>
+    <td> ... </td>
+    <td> ... </td> 
+    <td> ...  </td>
   </tr>
 
 </table>
@@ -368,33 +369,33 @@ list.stream.forEach(name->System.out.println(name));
     <th>연산 인수</th>
   </tr>
   <tr>
-    <td> <xmp>filter</xmp> </td>
-    <td> <xmp>Stream<T></xmp> </td> 
-    <td> <xmp>Predicate<T></xmp> </td>
+    <td> filter </td>
+    <td> Stream<T> </td> 
+    <td> Predicate<T> </td>
   </tr>
 
    <tr>
-   <td> <xmp>map</xmp> </td>
-    <td> <xmp>Stream<T></xmp> </td> 
-    <td> <xmp>Function<T,R></xmp> </td>
+   <td> map </td>
+    <td> Stream<T> </td> 
+    <td> Function<T,R> </td>
   </tr>
 
    <tr>
-    <td> <xmp>limit</xmp> </td>
-    <td> <xmp>Stream<T></xmp> </td> 
-    <td> <xmp></xmp> </td>
+    <td> limit </td>
+    <td> Stream<T> </td> 
+    <td>  </td>
   </tr>
 
   <tr>
-  <td> <xmp>sorted</xmp> </td>
-    <td> <xmp>Stream<T></xmp> </td> 
-    <td> <xmp>Comparator<T></xmp> </td>
+  <td> sorted </td>
+    <td> Stream<T> </td> 
+    <td> Comparator<T> </td>
   </tr>
 
    <tr>
-    <td> <xmp>distinct</xmp> </td>
-    <td> <xmp>Stream<T></xmp> </td> 
-    <td> <xmp></xmp> </td>
+    <td> distinct </td>
+    <td> Stream<T> </td> 
+    <td>  </td>
   </tr>
 </table>
 
@@ -405,16 +406,16 @@ list.stream.forEach(name->System.out.println(name));
     <th>반환 형식</th> 
   </tr>
   <tr>
-    <td> <xmp>forEach</xmp> </td>
-    <td> <xmp>스트림의 각 요소를 소비하며 람다 적용 . void반환</xmp> </td> 
+    <td> forEach </td>
+    <td> 스트림의 각 요소를 소비하며 람다 적용 . void반환 </td> 
   </tr>
    <tr>
-    <td> <xmp>count</xmp> </td>
-    <td> <xmp>스트림 요소의 수를 반환. Long반환</xmp> </td> 
+    <td> count </td>
+    <td> 스트림 요소의 수를 반환. Long반환 </td> 
   </tr>
    <tr>
-    <td> <xmp>collect</xmp> </td>
-    <td> <xmp>List Map형태의 컬랙션 반환</xmp> </td> 
+    <td> collect </td>
+    <td> List Map형태의 컬랙션 반환 </td> 
   </tr>
 </table>
 
