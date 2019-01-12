@@ -146,6 +146,7 @@
 		* size()	: 현재 포함하고 잇는 요소 개수 반환
 		* iterator(): 해당 컬렉션이 포함하고 있는 요소 순회를 위한 iterator 객체를 반환
 	- **Java 8 버전 이후 Stream 관련 메서드 추가**
+	- ![Alt text](/img/CollectionCore.jpg)
 
 * Generic Type
 	- 컬렉션 프레임워크에 대해서 정확히 이해하기 위해서는 Generic에 대한 이해가 필요
